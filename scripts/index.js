@@ -12,8 +12,9 @@ initialCards.forEach(function (card) {
 });
 
 const openEditProfileBtn = document.querySelector(".profile__edit-button");
-const closeEditProfileBtn = document.querySelector(".popup__close");
 const editProfileModal = document.querySelector("#edit-popup");
+const closeEditProfileBtn = editProfileModal.querySelector(".popup__close");
+let editProfileForm = editProfileModal.querySelector("#edit-profile-form");
 
 function openModal(modalElement) {
     modalElement.classList.add("popup_is-opened");
@@ -24,9 +25,48 @@ function closeModal(modalElement) {
 }
 
 openEditProfileBtn.addEventListener ("click", () => {
-    openModal(editProfileModal);
+    handleOpenEditModal();
 });
 
 closeEditProfileBtn.addEventListener ("click", () => {
     closeModal(editProfileModal);
 });
+
+function fillProfileForm() {
+    const profileTitle = document.querySelector(".profile__title");
+    const profileDescription = document.querySelector(".profile__description");
+
+    const name = profileTitle.textContent;
+    const description = profileDescription.textContent;
+
+    const inputName = editProfileModal.querySelector(".popup__input_type_name");
+    const inputDescription = editProfileModal.querySelector(".popup__input_type_description");
+
+    inputName.value = name;
+    inputDescription.value = description;   
+}
+
+function handleOpenEditModal() {
+    openModal(editProfileModal);
+    fillProfileForm();
+}
+
+function handleProfileFormSubmit(evt) {
+    evt.preventDefault();
+
+    const inputName = editProfileModal.querySelector(".popup__input_type_name");
+    const inputDescription = editProfileModal.querySelector(".popup__input_type_description");
+
+    const newName = inputName.value;
+    const newDescription = inputDescription.value;
+
+    const profileTitle = document.querySelector(".profile__title");
+    const profileDescription = document.querySelector(".profile__description");
+
+    profileTitle.textContent = newName;
+    profileDescription.textContent = newDescription;
+
+    closeModal(editProfileModal);
+}
+
+editProfileForm.addEventListener('submit', handleProfileFormSubmit);
