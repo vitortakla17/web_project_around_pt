@@ -154,3 +154,25 @@ const closeImagePopUp = imagePopUpModal.querySelector('.popup__close');
 closeImagePopUp.addEventListener ('click', () => {
     closeModal(imagePopUpModal);
 });
+
+// editProfileForm
+const saveEditProfileBtn = editProfileForm.querySelector('.popup__button');
+
+editProfileForm.addEventListener("input", (event) => {
+    toggleInputError(event.target);
+    
+    saveEditProfileBtn.disabled = !editProfileForm.checkValidity();
+});
+
+function toggleInputError(input) {
+    const errorElement = editProfileForm.querySelector(
+        `.${input.classList[1]}-error`
+    );
+
+    if (!input.validity.valid) {
+        errorElement.textContent = input.validationMessage;
+    } else {
+        errorElement.textContent = "";
+    }
+}
+

@@ -56,14 +56,22 @@
               name="name"
               placeholder="Nome"
               type="text"
+              required
+              minlength="2"
+              maxlength="40"
             />
+            <span class="popup__input_type_name-error"></span>
             <input
               class="popup__input popup__input_type_description"
               name="description"
               placeholder="Sobre mim"
               type="text"
+              required
+              minlength="2"
+              maxlength="200"
             />
-            <button class="button popup__button" type="submit">Salvar</button>
+            <span class="popup__input_type_description-error"></span>
+            <button class="button popup__button" type="submit" disabled>Salvar</button>
           </form>
         </div>
       </div>

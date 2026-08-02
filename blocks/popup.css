@@ -31,6 +31,12 @@
   cursor: pointer;
 }
 
+.popup__button:disabled {
+  background: white;
+  color: grey;
+  border: 1px solid  grey;
+}
+
 .popup__close {
   width: 35px;
   height: 35px;
@@ -74,6 +80,18 @@
   box-sizing: border-box;
   padding: 10px 0 0;
   margin-bottom: 10px;
+}
+
+.popup__input_type_name-error,
+.popup__input_type_description-error {
+    color: #ff0000;
+    font-size: 12px;
+    display: block;
+    min-height: 14px;
+}
+
+.popup__input:invalid {
+  border-bottom: 1px solid red;
 }
 
 .popup__input:last-of-type {
