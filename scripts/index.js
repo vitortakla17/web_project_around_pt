@@ -101,7 +101,7 @@ newCardForm.addEventListener('submit', handleCardFormSubmit);
 const cardsContainer = document.querySelector(".cards__list");
 const cardTemplate = document.querySelector("#card-template");
 
-function getCardElement (name = "Lugar sem nome", link = "./images/placeholder.jpg") {
+function getCardElement (name, link) {
     const cardElement = cardTemplate
     .content.querySelector(".card").cloneNode(true);
     const cardImage = cardElement.querySelector(".card__image");
@@ -155,18 +155,11 @@ closeImagePopUp.addEventListener ('click', () => {
     closeModal(imagePopUpModal);
 });
 
-// editProfileForm
-const saveEditProfileBtn = editProfileForm.querySelector('.popup__button');
-
-editProfileForm.addEventListener("input", (event) => {
-    toggleInputError(event.target);
-    
-    saveEditProfileBtn.disabled = !editProfileForm.checkValidity();
-});
 
 function toggleInputError(input) {
-    const errorElement = editProfileForm.querySelector(
-        `.${input.classList[1]}-error`
+    const form = input.closest(".popup__form");
+    const errorElement = form.querySelector(
+    `.${input.classList[1]}-error`
     );
 
     if (!input.validity.valid) {
@@ -175,4 +168,18 @@ function toggleInputError(input) {
         errorElement.textContent = "";
     }
 }
+
+
+function enableValidation(formElement) {
+    const submitButton = formElement.querySelector(".popup__button");
+
+    formElement.addEventListener("input", (event) => {
+        toggleInputError(event.target);
+
+        submitButton.disabled = !formElement.checkValidity();
+    });
+}
+
+enableValidation(editProfileForm);
+enableValidation(newCardForm);
 
