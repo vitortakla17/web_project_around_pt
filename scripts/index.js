@@ -53,8 +53,9 @@ function fillProfileForm() {
 }
 
 function handleOpenEditModal() {
-    openModal(editProfileModal);
     fillProfileForm();
+    resetValidation(editProfileForm);
+    openModal(editProfileModal);
 }
 
 function handleProfileFormSubmit(evt) {
@@ -78,6 +79,7 @@ function handleProfileFormSubmit(evt) {
 editProfileForm.addEventListener('submit', handleProfileFormSubmit);
 
 addCardButton.addEventListener('click', () => {
+    resetValidation(newCardForm);
     openModal(newCardModal);
 });
 
@@ -183,3 +185,41 @@ function enableValidation(formElement) {
 enableValidation(editProfileForm);
 enableValidation(newCardForm);
 
+
+function closePopupOnOverlayClick (modal) {
+    modal.addEventListener ("click", (event) => {
+        if (event.target === event.currentTarget) {
+            closeModal(modal);
+        }
+    });
+}
+
+closePopupOnOverlayClick(editProfileModal);
+closePopupOnOverlayClick(newCardModal);
+closePopupOnOverlayClick(imagePopUpModal);
+
+
+function closePopupOnEsc(modal) {
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && modal.classList.contains("popup_is-opened")) {
+            closeModal(modal);
+        }
+    });
+}
+
+closePopupOnEsc(editProfileModal);
+closePopupOnEsc(newCardModal);
+closePopupOnEsc(imagePopUpModal);
+
+
+function resetValidation(formElement) {
+    const inputs = formElement.querySelectorAll(".popup__input");
+    const submitButton = formElement.querySelector(".popup__button");
+
+    inputs.forEach((input) => {
+        const errorElement = formElement.querySelector(`.${input.id}-error`);
+        errorElement.textContent = "";
+    });
+
+    submitButton.disabled = true;
+}
