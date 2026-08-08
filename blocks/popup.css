@@ -82,10 +82,7 @@
   margin-bottom: 10px;
 }
 
-.popup__input_type_name-error,
-.popup__input_type_description-error,
-.popup__input_type_card-name-error,
-.popup__input_type_url-error {
+.popup__error {
     color: #ff0000;
     font-size: 12px;
     display: block;

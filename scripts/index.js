@@ -159,7 +159,7 @@ closeImagePopUp.addEventListener ('click', () => {
 function toggleInputError(input) {
     const form = input.closest(".popup__form");
     const errorElement = form.querySelector(
-    `.${input.classList[1]}-error`
+    `.${input.id}-error`
     );
 
     if (!input.validity.valid) {
